@@ -526,10 +526,13 @@
 
 <!-- JAVASCRIPT -->
 <script>
+  function genEventId() { return 'eid_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); }
+
   // Rastreamento AddToCart ao clicar no CTA
   document.getElementById('btn-cta').addEventListener('click', function(e) {
+    var eventId = genEventId();
     if (typeof fbq === 'function') {
-      fbq('track', 'AddToCart', { value: 147, currency: 'BRL' });
+      fbq('track', 'AddToCart', { value: 147, currency: 'BRL' }, {eventID: eventId});
     }
     if (typeof gtag === 'function') {
       gtag('event', 'add_to_cart', { currency: 'BRL', value: 147 });
